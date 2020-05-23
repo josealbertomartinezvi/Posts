@@ -61,4 +61,28 @@ class PostTest extends TestCase
         // CONFIRMAR LA ELIMINACION DEL USUARIO
         $this->assertNull(Post::find($post->id));
     }
+
+    /**
+     * @test
+     */
+    public function update_post(){
+
+        $data = [
+            'title' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
+            'content' => $this->faker->text($maxNbChars = 40)
+        ];
+
+        create('App\User');
+        $post = create('App\Models\Post');
+
+        $response = $this->json('PUT', $this->baseUrl . "posts/{$post->id}", $data);
+        $response->assertStatus(200);
+
+        //El metodo fresh() retornara al mismo objeto pero actualizado
+        $post = $post->fresh();
+
+        // Validar que el contenido de $post sea igual al contenido de $data
+        $this->assertEquals($post->title, $data['title']);
+        $this->assertEquals($post->content, $data['content']);
+    }
 }
