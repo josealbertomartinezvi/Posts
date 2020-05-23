@@ -57,7 +57,7 @@ class AuthController extends Controller
         if($user){
             if(Hash::check($request->password, $user->password)){
                 // Generar token de acceso
-                $token = $user->createToken('Laravel User Client')->accesToken;
+                $token = $user->createToken('Laravel User Client')->accessToken;
                 return response()->json([
                     'message' => 'Login Successfully',
                     'token' => $token

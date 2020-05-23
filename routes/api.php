@@ -21,7 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // GRUPO PRUEBAS UNITARIAS
 Route::group([
 	"prefix" => "v1",
-	"namespace" => "Api\V1"
+    "namespace" => "Api\V1",
+    "middleware" => ["auth:api"]
 ], function(){
     Route::apiResource('posts', 'PostController');
 });
