@@ -15,8 +15,8 @@ class PostTest extends TestCase
     /**
      * @test
      */
-    public function stores_post()
-    {
+    public function stores_post(){
+
         $user = create('App\User');
 
         $data = [
@@ -45,5 +45,20 @@ class PostTest extends TestCase
             ]
         ]);
 
+    }
+
+    /**
+     * @test
+     */
+    public function delete_post(){
+
+        create('App\User');
+        $post = create('App\Models\Post');
+
+        $this->json('DELETE', $this->baseUrl . "posts/{$post->id}")
+                ->assertStatus(204);
+
+        // CONFIRMAR LA ELIMINACION DEL USUARIO
+        $this->assertNull(Post::find($post->id));
     }
 }
