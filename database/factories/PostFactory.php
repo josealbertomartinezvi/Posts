@@ -10,6 +10,6 @@ $factory->define(Post::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence($nbWords = 6, $variableNbWords = true),
         'content' => $faker->text($maxNbChars = 200),
-        'user_id' => User::all()->ramdom()
+        'user_id' => User::all()->random()
     ];
 });

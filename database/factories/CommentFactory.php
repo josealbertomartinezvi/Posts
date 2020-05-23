@@ -10,7 +10,7 @@ use Faker\Generator as Faker;
 $factory->define(Comment::class, function (Faker $faker) {
     return [
         'content' => $faker->text($maxNbChars = 200),
-        'post_id' => Post::all()->ramdom(),
-        'user_id' => User::all()->ramdom()
+        'post_id' => Post::all()->random(),
+        'user_id' => User::all()->random()
     ];
 });
