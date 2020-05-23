@@ -25,3 +25,6 @@ Route::group([
 ], function(){
     Route::apiResource('posts', 'PostController');
 });
+
+Route::post('login', 'Api\AuthController@login');
+Route::post('signup', 'Api\AuthController@signup');
