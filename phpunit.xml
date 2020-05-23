@@ -28,6 +28,7 @@
         <server name="SESSION_DRIVER" value="array"/>
         <server name="TELESCOPE_ENABLED" value="false"/>
         <!-- TESTING -->
-        <env name="DB_CONNCECTION" value="sqlite_testing"/>
+        <env name="DB_CONNECTION" value="mysql"/>
+        <env name="DB_DATABASE" value="posts_testing"/>
     </php>
 </phpunit>
