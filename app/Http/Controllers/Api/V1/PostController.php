@@ -32,8 +32,9 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
+        PostResource::withoutwrapping();
         $post = Post::create($request->all());
-        return response()->json(['data' => $post], 201);
+        return new PostResource($post);
     }
 
     /**
