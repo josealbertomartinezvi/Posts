@@ -32,8 +32,15 @@ Route::group([
     Route::get('posts/{post}/relationships/user', 'PostRelationShipController@user')
         ->name('posts.relationships.user');
 
+    Route::get('posts/{post}/user', 'PostRelationShipController@user')
+        ->name('posts.user');
+
     Route::get('posts/{post}/relationships/comments', 'PostRelationShipController@comments')
         ->name('posts.relationships.comments');
+
+    Route::get('posts/{post}/comments', 'PostRelationShipController@comments')
+        ->name('posts.comments');
+
 });
 
 Route::post('login', 'Api\AuthController@login');
