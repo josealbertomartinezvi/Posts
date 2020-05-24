@@ -22,7 +22,8 @@ class PostRelationshipResource extends JsonResource
                 ],
                 "data" => new UserIdentifierResource($this->user)
             ],
-            "comments" => new PostCommentsRelationshipCollection($this->comments)
+            "comments" => (new PostCommentsRelationshipCollection($this->comments))
+                            ->additional(["post" => $this->id])
         ];
     }
 }
