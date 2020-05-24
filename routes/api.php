@@ -24,7 +24,16 @@ Route::group([
     "namespace" => "Api\V1",
     "middleware" => ["auth:api"]
 ], function(){
-    Route::apiResource('posts', 'PostController');
+    Route::apiResources([
+        'posts' => 'PostController',
+        'users' => 'UserController'
+    ]);
+
+    Route::get('posts/{post}/relationships/user', 'PostRelationShipController@user')
+        ->name('posts.relationships.user');
+
+    Route::get('posts/{post}/relationships/comments', 'PostRelationShipController@comments')
+        ->name('posts.relationships.comments');
 });
 
 Route::post('login', 'Api\AuthController@login');
