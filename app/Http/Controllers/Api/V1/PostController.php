@@ -20,7 +20,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return new PostCollection(Post::paginate(1));
+        // return new PostCollection(Post::paginate(1));
+        return new PostCollection(Post::with(['user', 'comments'])->paginate(1));
     }
 
     /**

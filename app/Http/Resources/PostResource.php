@@ -32,7 +32,11 @@ class PostResource extends JsonResource
             "links" => [
                 "self" => route('posts.show', ['post' => $this->id])
             ],
-            "relationships" => new PostRelationshipResource($this)
+
+            // Validar si el post contiene relaciones
+            $this->mergeWhen(($this->isUserLoaded() && $this->isCommentsLoaded()), [
+                "relationships" => new PostRelationshipResource($this)
+            ])
         ];
     }
 }

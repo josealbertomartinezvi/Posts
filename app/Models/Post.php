@@ -32,4 +32,12 @@ class Post extends Model
     public function user(){
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    public function isUserLoaded(){
+        return $this->relationLoaded('user');
+    }
+
+    public function isCommentsLoaded(){
+        return $this->relationLoaded('comments');
+    }
 }
