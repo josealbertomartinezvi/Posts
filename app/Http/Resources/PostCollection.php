@@ -4,6 +4,9 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
+use App\User;
+use App\Models\Comment;
+
 class PostCollection extends ResourceCollection
 {
     /**
@@ -31,12 +34,21 @@ class PostCollection extends ResourceCollection
             return $post->user;
         });
 
+        $comments = $this->collection->flatMap(function($post){
+            return $post->comments;
+        });
+
+        $include = $users->merge($comments);
+
         return [
             'links' => [
                 'self' => route('posts.index')
             ],
-            'include' => $users->map(function($user){
-                return new UserResource($user);
+            'include' => $include->map(function($item){
+                if($item instanceof User)
+                    return new UserResource($item);
+                else if($item instanceof Comment)
+                    return new CommentResource($item);
             })
         ];
 
