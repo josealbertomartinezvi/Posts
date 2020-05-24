@@ -18,4 +18,27 @@ class PostCollection extends ResourceCollection
             "data" => PostResource::collection($this->collection)
         ];
     }
+
+    /**
+     * Add resources into toArray.
+     *
+     * @param $request
+     * @return array
+     */
+    public function with($request){
+
+        $users = $this->collection->map(function($post){
+            return $post->user;
+        });
+
+        return [
+            'links' => [
+                'self' => route('posts.index')
+            ],
+            'include' => $users->map(function($user){
+                return new UserResource($user);
+            })
+        ];
+
+    }
 }
